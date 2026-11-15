@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}
-Acerca de
-{% endblock %}
+{% block title %}Inicio{% endblock %}
 
 {% block content %}
-<h1>Acerca de {{ proyecto }}</h1>
-<p>Esta es una aplicación desarrollada con Flask.</p>
+<div class="p-5 mb-4 rounded-3" style="background-color: #f3e8ff;">
+    <h1 class="display-5" style="color: #8e44ad;">
+        Página de inicio
+    </h1>
+
+    <p class="lead">
+        Bienvenido(a) a mi proyecto con Flask, ahora con estilo de Bootstrap.
+    </p>
+
+    <a class="btn btn-lg text-white"
+       style="background-color: #b57edc;"
+       href="{{ url_for('about') }}">
+       Conoce más
+    </a>
+</div>
 {% endblock %}
