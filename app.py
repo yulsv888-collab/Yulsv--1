@@ -18,6 +18,16 @@ bootstrap = Bootstrap5(app)
 db = SQLAlchemy(app)
 
 
+class Contacto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100), nullable=False)
+    correo = db.Column(db.String(120), nullable=False)
+
+
+with app.app_context():
+    db.create_all()
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -36,10 +46,20 @@ def contacto():
     form = ContactoForm()
 
     if form.validate_on_submit():
+
+        nuevo_contacto = Contacto(
+            nombre=form.nombre.data,
+            correo=form.correo.data
+        )
+
+        db.session.add(nuevo_contacto)
+        db.session.commit()
+
         flash(
             f"¡Gracias, {form.nombre.data}! Recibimos tus datos.",
             "success"
         )
+
         return redirect(url_for("contacto"))
 
     return render_template(
