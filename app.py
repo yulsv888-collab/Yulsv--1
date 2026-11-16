@@ -68,5 +68,16 @@ def contacto():
     )
 
 
+@app.route("/contactos")
+def contactos():
+
+    lista_contactos = Contacto.query.all()
+
+    return render_template(
+        "contactos.html",
+        contactos=lista_contactos
+    )
+
+
 if __name__ == "__main__":
     app.run(debug=True)

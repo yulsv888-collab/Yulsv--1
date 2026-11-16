@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Contactos Registrados
+{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4">Contactos Registrados</h1>
+
+<table class="table table-striped table-bordered">
+
+    <thead class="table-primary">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for contacto in contactos %}
+        <tr>
+            <td>{{ contacto.id }}</td>
+            <td>{{ contacto.nombre }}</td>
+            <td>{{ contacto.correo }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+{% endblock %}
