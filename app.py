@@ -1,9 +1,11 @@
 import os
 from dotenv import load_dotenv
 
-from flask import Flask, render_template
+from flask import Flask, flash, redirect, render_template, url_for
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
+
+from forms import ContactoForm
 
 load_dotenv()
 
@@ -26,6 +28,23 @@ def about():
     return render_template(
         "about.html",
         proyecto="Mi primera app Flask"
+    )
+
+
+@app.route("/contacto", methods=["GET", "POST"])
+def contacto():
+    form = ContactoForm()
+
+    if form.validate_on_submit():
+        flash(
+            f"¡Gracias, {form.nombre.data}! Recibimos tus datos.",
+            "success"
+        )
+        return redirect(url_for("contacto"))
+
+    return render_template(
+        "contacto.html",
+        form=form
     )
 
 
