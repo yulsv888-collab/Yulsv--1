@@ -77,7 +77,20 @@ def contactos():
         "contactos.html",
         contactos=lista_contactos
     )
+@app.route("/eliminar/<int:id>")
+def eliminar(id):
 
+    contacto = Contacto.query.get_or_404(id)
+
+    db.session.delete(contacto)
+    db.session.commit()
+
+    flash(
+        "Contacto eliminado correctamente",
+        "success"
+    )
+
+    return redirect(url_for("contactos"))
 
 if __name__ == "__main__":
     app.run(debug=True)
