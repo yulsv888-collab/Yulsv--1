@@ -77,6 +77,34 @@ def contactos():
         "contactos.html",
         contactos=lista_contactos
     )
+@app.route("/editar/<int:id>", methods=["GET", "POST"])
+def editar(id):
+
+    contacto = Contacto.query.get_or_404(id)
+
+    form = ContactoForm()
+
+    if form.validate_on_submit():
+
+        contacto.nombre = form.nombre.data
+        contacto.correo = form.correo.data
+
+        db.session.commit()
+
+        flash(
+            "Contacto actualizado correctamente",
+            "success"
+        )
+
+        return redirect(url_for("contactos"))
+
+    form.nombre.data = contacto.nombre
+    form.correo.data = contacto.correo
+
+    return render_template(
+        "editar_contacto.html",
+        form=form
+    )
 @app.route("/eliminar/<int:id>")
 def eliminar(id):
 

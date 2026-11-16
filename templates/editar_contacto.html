@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block title %}
+Editar contacto
+{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4">
+    Editar contacto
+</h1>
+
+{{ render_form(form, novalidate=True) }}
+
+{% endblock %}
